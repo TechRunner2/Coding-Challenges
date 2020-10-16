@@ -38,7 +38,7 @@ def main():
         key = int(sys.argv[key_flag_location + 1])
     else:
         #Randomly generate a key
-        key = random.randint(0, 100)
+        key = random.randint(1, 100)
         print("Key:", key)
     if "-E" in sys.argv:
         #Get Encrypt Flag Location
