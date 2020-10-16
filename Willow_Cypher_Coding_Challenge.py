@@ -6,26 +6,54 @@ Description: A Caesar Cipher coding challenge given by the Crunix Club"
 
 import sys
 
+help_text = """
+        NAME
+            wcc - Willow Caesar Cipher
+        SYNOPSIS
+            wcc -k [Cyper Key (Int)] [ENCRYPTION FLAG] [STRING]
+        DESCRIPTION
+            Encrypt or Decrypt a string using a Caesar Cipher (Warning: Does not change special characters)
+            -E
+                Encrypts String
+            -D
+                Decrypts String
+            -h
+                Prints Help Screen
+        AUTHOR
+            Written by Willow Behar.
+        LICENSING
+            GPLv3
+        """
+
 def main():
     #Get Key
     if "-k" in sys.argv:
+        #Find key flag location
         key_flag_location = sys.argv.index("-k")
+        #Get Key Integer
         key = int(sys.argv[key_flag_location + 1])
-    if "-E" in sys.argv:
-        #Get String
+    else:
+        print("Missing Key")
+        print(help_text)
+    if "-h" in sys.argv:
+        #Help
+        print(help_text)
+    elif "-E" in sys.argv:
+        #Get Encrypt Flag Location
         encrypt_flag_location = sys.argv.index("-E")
+        #Get String to encrypt
         encrypt_string = str(sys.argv[encrypt_flag_location + 1])
         #Encrypt
         print(Encrypt(key, encrypt_string))
-    if "-D" in sys.argv:
-        #Get String
+    elif "-D" in sys.argv:
+        #Get Decrypt flag location
         decrypt_flag_location = sys.argv.index("-D")
+        #Get String
         decrypt_string = sys.argv[decrypt_flag_location + 1]
         #Decrypt
         print(Decrypt(key, decrypt_string))
-    if "-h" in sys.argv:
-        #Help
-        print("Help")
+    else:
+        print(help_text)
 
 def Encrypt(key, phrase):
     new_string = ""
