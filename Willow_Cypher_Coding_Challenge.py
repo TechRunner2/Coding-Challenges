@@ -5,6 +5,7 @@ Description: A Caesar Cipher coding challenge given by the Crunix Club"
 """
 
 import sys
+import random
 
 help_text = """
         NAME
@@ -26,6 +27,9 @@ help_text = """
         """
 
 def main():
+    #Help
+    if "-h" in sys.argv:
+        print(help_text)
     #Get Key
     if "-k" in sys.argv:
         #Find key flag location
@@ -33,12 +37,10 @@ def main():
         #Get Key Integer
         key = int(sys.argv[key_flag_location + 1])
     else:
-        print("Missing Key")
-        print(help_text)
-    if "-h" in sys.argv:
-        #Help
-        print(help_text)
-    elif "-E" in sys.argv:
+        #Randomly generate a key
+        key = random.randint(0, 100)
+        print("Key:", key)
+    if "-E" in sys.argv:
         #Get Encrypt Flag Location
         encrypt_flag_location = sys.argv.index("-E")
         #Get String to encrypt
