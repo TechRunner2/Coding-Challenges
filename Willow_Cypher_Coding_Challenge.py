@@ -34,7 +34,7 @@ def Encrypt(key, phrase):
     if phrase is not "":
         for letter in phrase:
             letter_value = ord(letter)
-            if 94 <= letter_value => 122:
+            if 94 <= letter_value >= 122:
                 letter_value += key
                 if letter_value > 122:
                     while letter_value > 122:
@@ -44,7 +44,9 @@ def Encrypt(key, phrase):
                     while letter_value < 94:
                         offset = letter_value - 94
                         letter_value = 122 + offset
-             new_string.join()
+                new_string += chr(letter_value)
+            else:
+                new_string += letter
 
 def Decrypt(key, phrase):
     if phrase is not "":
