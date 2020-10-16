@@ -86,7 +86,7 @@ def main():
         #Get File Location
         encrypt_file_name = str(sys.argv[encrypt_file_location + 1])
         #Open File
-        encrypt_file_open = open(encrypt_file_open, "r")
+        encrypt_file_open = open(encrypt_file_name, "r")
         #Read File
         encrypt_file_data = encrypt_file_open.read()
         #Encrypt File
