@@ -20,13 +20,21 @@ help_text = """
                 Decrypts String
             -h
                 Prints Help Screen
+            -EF
+                Encrypt File
+            -DF
+                Decrypt File
+            -o
+                Save output to file instead of printing to terminal
         AUTHOR
             Written by Willow Behar.
         LICENSING
             GPLv3
         """
 
+
 def main():
+    file_output_flag = False
     #Help
     if "-h" in sys.argv:
         print(help_text)
@@ -40,13 +48,29 @@ def main():
         #Randomly generate a key
         key = random.randint(1, 100)
         print("Key:", key)
+
+    if "-o" in sys.argv:
+        #Set flag to true
+        file_output_flag = True
+        #Get Location of Flag
+        file_output_location = sys.argv.index("-o")
+        #Get File Name
+        file_output_name = sys.argv[file_output_location + 1]
+        #Open file
+        file_output_open = open(file_output_name, "w")
+
     if "-E" in sys.argv:
         #Get Encrypt Flag Location
         encrypt_flag_location = sys.argv.index("-E")
         #Get String to encrypt
         encrypt_string = str(sys.argv[encrypt_flag_location + 1])
         #Encrypt
-        print(Encrypt(key, encrypt_string))
+        encrypted_phrase = Encrypt(key, encrypt_string)
+        if file_output_flag:
+            file_output_open.write(encrypted_phrase)
+        else:
+            print(encrypted_phrase)
+
     elif "-D" in sys.argv:
         #Get Decrypt flag location
         decrypt_flag_location = sys.argv.index("-D")
@@ -54,6 +78,38 @@ def main():
         decrypt_string = sys.argv[decrypt_flag_location + 1]
         #Decrypt
         print(Decrypt(key, decrypt_string))
+
+    elif "-EF" in sys.argv:
+        #Get Encrypt File Flag
+        encrypt_file_location = sys.argv.index("-EF")
+        #Get File Location
+        encrypt_file_name = str(sys.argv[encrypt_file_location + 1])
+        #Open File
+        encrypt_file_open = open(encrypt_file_open, "r")
+        #Read File
+        encrypt_file_data = encrypt_file_open.read()
+        #Encrypt File
+        encrypted_file_data = Encrypt(key, encrypt_file_data)
+        if file_output_flag:
+            file_output_open.write(encrypted_file_data)
+        else:
+            print(encrypted_file_data)
+
+    elif "-DF" in sys.argv:
+        #Get Decrypt File Flag
+        decrypt_file_location = sys.argv.index("-DF")
+        #Get File location
+        decrypt_file_name = str(sys.argv[decrypt_file_location + 1])
+        #Open File
+        decrypt_file_open = open(decrypt_file_name, "r")
+        #Read File
+        decrypt_file_data = decrypt_file_open.read()
+        #Decrypt File
+        decrypted_file_data = Decrypt(key, decrypt_file_data)
+        if file_output_flag:
+            file_output_open.write(decrypted_file_data)
+        else:
+            print(decrypted_file_data)
     else:
         print(help_text)
 
